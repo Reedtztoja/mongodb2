@@ -9,6 +9,10 @@ app.get('/', async (req, res) => {
 app.get('/listAll', async (req, res) => {
     res.write("<h1>Lista wszystkich rekordow w bazie</h1>");
     const client = await db.connect();
+    let list = await db.getAllListings(client);
+    list = list.toString();
+    res.write(list);
+    db.close(client);
     res.end();
 })
 
