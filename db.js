@@ -28,8 +28,18 @@ async function get(client, criteria) {
     return list;
 }
 
+async function add(client, data) {
+    const collection = await client.db('sample_airbnb').collection('listingsAndReviews');
+    collection.insertOne(data);
+}
+
 function close(client) {
     client.close();
     console.log("Successfully disconnected from MongoDB");
 }
-module.exports = {connect, getAllListings, close, get}
+
+async function delete_parts(client, partId) {
+    let r = await client.db("parts").collection("parts").insertOne(data);
+    return r;
+}
+module.exports = {connect, getAllListings, close, get, add, delete_parts}

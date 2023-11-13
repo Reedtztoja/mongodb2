@@ -41,6 +41,17 @@ app.post('/list', async (req, res) => {
     db.close(client);
     res.end();
 })
+app.post('/add', async (req, res) => {
+    console.log(req.body)
+    const client = await db.connect();
+    db.add(client, req.body);
+    res.sendStatus(200);
+});
 
+app.post('/delete', async (req, res) => {
+    const client = await db.connect();
+    let r = await db.delete_part(client, req.body.id);
+    res.send(r);
+})
 
 app.listen(8000);
